@@ -156,28 +156,42 @@ function checkAnswer(answerIndex){
     }
     else{
 
-        saveScore();
-
-        window.location.href = "results.html";
+        submitScore();
 
     }
-
-    startTimer();
 }
 
-function saveScore(){
+function submitScore() {
 
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+fetch("http://127.0.0.1:5000/submit-score", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+name: "Player",
+score: score
+})
+})
 
-    leaderboard.push({
-    name: playerName,
-    score: score
-    });
+.then(response => response.json())
 
-    leaderboard.sort(function(a,b){
-    return b.score - a.score;
-    });
+.then(data => {
 
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+localStorage.setItem("finalScore", score);
 
-    }
+window.location.href = "results.html";
+
+})
+
+.catch(error => {
+
+console.log("Error:", error);
+
+localStorage.setItem("finalScore", score);
+
+window.location.href = "results.html";
+
+});
+
+}

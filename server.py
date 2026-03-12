@@ -1,4 +1,27 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+
+app = Flask(__name__)
+CORS(app)
+
+def init_db():
+
+    conn = sqlite3.connect("brainquest.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS leaderboard (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        score INTEGER
+    )
+    """)
+
+    conn.commit()
+
+    conn.close()
 
 app = Flask(__name__)
 
@@ -18,21 +41,51 @@ def submit_score():
     name = data["name"]
     score = data["score"]
 
-    leaderboard.append({
-        "name": name,
-        "score": score
-    })
+    conn = sqlite3.connect("brainquest.db")
 
-    leaderboard.sort(key=lambda x: x["score"], reverse=True)
+    cursor = conn.cursor()
 
-    return jsonify({"status": "success"})
+    cursor.execute(
+        "INSERT INTO leaderboard (name, score) VALUES (?, ?)",
+        (name, score)
+    )
+
+    conn.commit()
+
+    conn.close()
+
+    return jsonify({"status":"success"})
 
 
 @app.route("/leaderboard")
 def get_leaderboard():
 
+    conn = sqlite3.connect("brainquest.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT name, score FROM leaderboard ORDER BY score DESC LIMIT 10"
+    )
+
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    leaderboard = []
+
+    for row in rows:
+
+        leaderboard.append({
+            "name": row[0],
+            "score": row[1]
+        })
+
     return jsonify(leaderboard)
 
 
 if __name__ == "__main__":
+
+    init_db()
+
     app.run(debug=True)
