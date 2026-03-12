@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>BrainQuest Game</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <title>BrainQuest Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <!-- THIS DIV IS THE KEY TO CENTERING -->
+    <div class="page-container">
+        <h1>BrainQuest</h1>
 
-<h1>BrainQuest</h1>
+        <!-- Start Screen Section -->
+        <div id="startScreen">
+            <input id="playerName" placeholder="Enter your name">
+            <br>
+            <button id="startButton">Start Game</button>
+        </div>
 
-<input id="playerName" placeholder="Enter your name">
+        <!-- Game Section (The White Card) -->
+        <div id="gameArea" style="display:none;" class="white-card">
+            <h2 id="question">Question appears here</h2>
+            
+            <div id="answers">
+                <button class="answerBtn">Answer 1</button>
+                <button class="answerBtn">Answer 2</button>
+                <button class="answerBtn">Answer 3</button>
+                <button class="answerBtn">Answer 4</button>
+            </div>
 
-<button id="startButton">Start Game</button>
+            <div class="stats">
+                <h3>Score: <span id="score">0</span></h3>
+                <h3>Time Left: <span id="timer">10</span></h3>
+            </div>
+        </div>
+    </div>
 
-<div id="gameArea" style="display:none;">
-
-<h2 id="question">Question appears here</h2>
-
-<div id="answers">
-
-<button class="answerBtn">Answer 1</button>
-<button class="answerBtn">Answer 2</button>
-<button class="answerBtn">Answer 3</button>
-<button class="answerBtn">Answer 4</button>
-
-</div>
-
-<h3>Score: <span id="score">0</span></h3>
-
-<h3>Time Left: <span id="timer">10</span></h3>
-
-</div>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
-
 </html>

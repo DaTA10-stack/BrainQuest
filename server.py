@@ -5,28 +5,6 @@ import sqlite3
 app = Flask(__name__)
 CORS(app)
 
-def init_db():
-
-    conn = sqlite3.connect("brainquest.db")
-
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS leaderboard (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        score INTEGER
-    )
-    """)
-
-    conn.commit()
-
-    conn.close()
-
-app = Flask(__name__)
-
-leaderboard = []
-
 
 @app.route("/")
 def home():
@@ -84,8 +62,26 @@ def get_leaderboard():
     return jsonify(leaderboard)
 
 
+def init_db():
+
+    conn = sqlite3.connect("brainquest.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS leaderboard (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        score INTEGER
+    )
+    """)
+
+    conn.commit()
+
+    conn.close()
+
 if __name__ == "__main__":
 
     init_db()
 
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

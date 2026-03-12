@@ -1,37 +1,117 @@
-body {
+/* 1. Global Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Important for vertical centering */
+    background-color: #a0d8ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
 
-    font-family:'Courier New', monospace;
-
-    background-color: #98d1ffd3;
-
-    color: rgb(26, 25, 25);
-
+/* 2. The Master Centering Container */
+/* Use <div class="page-container"> on EVERY page right after <body> */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centers horizontally */
+    justify-content: center; /* Centers vertically */
+    min-height: 100vh;      /* Full screen height */
+    width: 100%;
     text-align: center;
-
+    box-sizing: border-box;
+    padding: 20px;
 }
 
-h1{
-
-    font-size: 50px;
-
+/* 3. Game Area & Results Card (The White Box) */
+#gameArea, .white-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 450px; /* Limits width so it looks like a card */
+    margin: 0 auto;
 }
 
-button{
+/* 4. Typography & Game Elements */
+h1 { font-size: 3rem; margin-bottom: 10px; }
 
-    padding: 12px 20px;
+#question {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 
-    font-size: 18px;
+#timer {
+    font-size: 1.2rem;
+    color: #e76f51;
+    margin-bottom: 15px;
+}
 
+#scoreDisplay {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+/* 5. Buttons (Game & Navigation) */
+button {
+    padding: 12px 24px;
+    font-size: 1.1rem;
     margin: 10px;
-
     cursor: pointer;
-
+    border-radius: 12px;
+    border: 2px solid #eee;
+    background-color: white;
+    transition: all 0.2s ease;
+    width: auto;
 }
 
-.answerBtn{
+button:hover {
+    background-color: #f8f9fa;
+    border-color: #a0d8ff;
+    transform: translateY(-2px);
+}
 
-    display:block;
+/* Specific Answer Button Styling */
+.answerBtn {
+    display: block;
+    width: 100%; /* Makes all answer buttons the same width */
+    max-width: 350px;
+    margin: 10px auto; /* Centers the button inside the white box */
+}
 
-    margin:10px auto;
+/* 6. Leaderboard Styling */
+#leaderboard, #leaderboardList {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
 
+#leaderboard li, #leaderboardList li {
+    background: #f1f1f1;
+    margin: 8px 0;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+#playerName {
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid white;
+    margin-bottom: 10px;
+    width: 250px;
+    outline: none;
+}
+
+#playerName:focus {
+    border-color: #2a9d8f;
+}
+
+.stats {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
 }

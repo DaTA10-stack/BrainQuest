@@ -169,7 +169,7 @@ headers: {
 "Content-Type": "application/json"
 },
 body: JSON.stringify({
-name: "Player",
+name: playerName,
 score: score
 })
 })
