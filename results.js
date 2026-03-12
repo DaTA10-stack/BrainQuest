@@ -18,7 +18,7 @@ data.forEach(function(player){
 
 let li = document.createElement("li");
 
-li.textContent = player.name + " - " + player.score;
+li.textContent = player.name + " : " + player.score;
 
 leaderboardElement.appendChild(li);
 
