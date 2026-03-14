@@ -62,6 +62,17 @@ def get_leaderboard():
     return jsonify(leaderboard)
 
 
+@app.route("/reset-db")
+def reset_db():
+    conn = sqlite3.connect("brainquest.db")
+    cursor = conn.cursor()
+    # This deletes all rows from the table
+    cursor.execute("DELETE FROM leaderboard")
+    conn.commit()
+    conn.close()
+    return "Leaderboard cleared successfully!"
+
+
 def init_db():
 
     conn = sqlite3.connect("brainquest.db")

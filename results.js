@@ -2,7 +2,7 @@ let finalScore = localStorage.getItem("finalScore");
 
 document.getElementById("finalScore").textContent = finalScore;
 
-fetch("http://127.0.0.1:5000/leaderboard")
+fetch("/api/leaderboard")
 
 .then(function(response){
 return response.json();

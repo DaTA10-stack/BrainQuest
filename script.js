@@ -163,7 +163,7 @@ function checkAnswer(answerIndex){
 
 function submitScore() {
 
-fetch("http://127.0.0.1:5000/submit-score", {
+fetch("/api/submit-score", {
 method: "POST",
 headers: {
 "Content-Type": "application/json"
