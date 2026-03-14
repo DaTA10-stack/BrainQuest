@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Register</title>
+</head>
+
+<body>
+
+<h1>Create Account</h1>
+
+<input id="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="registerUser()">Register</button>
+
+<script type="module">
+
+import { register } from "./auth.js"
+
+window.registerUser = async function(){
+
+let email = document.getElementById("email").value
+let password = document.getElementById("password").value
+
+let { data, error } = await register(email, password)
+
+if(error){
+
+alert(error.message)
+
+}else{
+
+alert("Account created!")
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

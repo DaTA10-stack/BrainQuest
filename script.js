@@ -161,37 +161,19 @@ function checkAnswer(answerIndex){
     }
 }
 
-function submitScore() {
+async function submitScore() {
 
-fetch("/api/submit-score", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify({
+const { data, error } = await supabase
+.from("leaderboard")
+.insert([
+{
 name: playerName,
 score: score
-})
-})
+}
+])
 
-.then(response => response.json())
+localStorage.setItem("finalScore", score)
 
-.then(data => {
-
-localStorage.setItem("finalScore", score);
-
-window.location.href = "results.html";
-
-})
-
-.catch(error => {
-
-console.log("Error:", error);
-
-localStorage.setItem("finalScore", score);
-
-window.location.href = "results.html";
-
-});
+window.location.href = "results.html"
 
 }

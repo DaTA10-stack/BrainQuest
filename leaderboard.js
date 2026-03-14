@@ -1,11 +1,22 @@
-let scores = [];
+document.addEventListener("DOMContentLoaded", () => {
+    const list = document.getElementById("leaderboardList");
 
-export default function handler(req, res) {
+    // 1. Fetch data from your Flask server
+    fetch("/api/leaderboard")
+        .then(response => response.json())
+        .then(data => {
+            // 2. Clear any existing content
+            list.innerHTML = "";
 
-if (req.method === "GET") {
-
-res.status(200).json(scores);
-
-}
-
-}
+            // 3. Loop through the players and add them to the list
+            data.forEach(entry => {
+                const li = document.createElement("li");
+                li.textContent = `${entry.name}: ${entry.score} pts`;
+                list.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading leaderboard:", error);
+            list.innerHTML = "<li>Could not load leaderboard.</li>";
+        });
+});
