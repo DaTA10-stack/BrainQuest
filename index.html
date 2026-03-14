@@ -10,15 +10,62 @@
 </head>
 
 <body>
-    <div class="page-container">
-        <h1>BrainQuest</h1>
-        <p>Test your knowledge and earn points!</p>
-        <div class="button-group">
-            <a href="game.html"><button>Start Game</button></a>
-            <a href="leaderboard.html"><button>Leaderboard</button></a>
-        </div>
-    </div>
-</body>
 
+<p id="userInfo"></p>
+
+<button id="logoutButton" onclick="logoutUser()" style="display:none;">Logout</button>
+
+<div class="page-container">
+    <h1>BrainQuest</h1>
+    <p>Test your knowledge and earn points!</p>
+
+    <div class="button-group">
+        <a href="game.html"><button>Start Game</button></a>
+        <a href="leaderboard.html"><button>Leaderboard</button></a>
+        <a href="login.html"><button>Login</button></a>
+        <a href="register.html"><button>Register</button></a>
+    </div>
+
+</div>
+
+<script type="module">
+
+import { getUser, logout } from "./auth.js"
+
+async function checkUser(){
+
+let user = await getUser()
+
+if(user){
+
+document.getElementById("userInfo").textContent =
+"Logged in as: " + user.email
+
+document.getElementById("logoutButton").style.display = "block"
+
+}else{
+
+document.getElementById("userInfo").textContent =
+"Not logged in"
+
+}
+
+}
+
+window.logoutUser = async function(){
+
+await logout()
+
+alert("Logged out")
+
+window.location.reload()
+
+}
+
+checkUser()
+
+</script>
+
+</body>
 
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Login</title>
+</head>
+
+<body>
+
+<h1>Login</h1>
+
+<input id="email" placeholder="Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="loginUser()">Login</button>
+
+<p>Don't have an account?</p>
+<a href="register.html">Register</a>
+
+<script type="module">
+
+import { login } from "./auth.js"
+
+window.loginUser = async function(){
+
+let email = document.getElementById("email").value
+let password = document.getElementById("password").value
+
+let { data, error } = await login(email, password)
+
+if(error){
+
+alert(error.message)
+
+}else{
+
+alert("Login successful!")
+
+window.location.href = "index.html"
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
